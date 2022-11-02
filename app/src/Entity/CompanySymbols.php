@@ -148,7 +148,7 @@ class CompanySymbols
         return $this;
     }
 
-    public function getLastModified(): ?int
+    public function getLastModified(): ?string
     {
         return $this->last_modified;
     }

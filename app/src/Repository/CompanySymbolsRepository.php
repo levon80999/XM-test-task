@@ -78,4 +78,19 @@ class CompanySymbolsRepository extends ServiceEntityRepository
             ->setMaxResults(1)
             ->getOneOrNullResult();
     }
+
+    public function findBySymbol($value)
+    {
+        $query = $this->createQueryBuilder('c');
+
+        if (!empty($value)) {
+            $query->andWhere($query->expr()->like('c.symbol', ':val'))->orWhere($query->expr()->like('c.company_name', ':val'))->setParameter('val', "{$value}%");
+        } else {
+            $query->setMaxResults(100);
+        }
+
+        return $query
+            ->getQuery()
+            ->getResult();
+    }
 }
