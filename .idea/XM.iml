@@ -105,7 +105,6 @@
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/web-link" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/polyfill-php81" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/monolog-bundle" />
-      <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/validator" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/polyfill-intl-grapheme" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/messenger" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/notifier" />

@@ -102,7 +102,6 @@
       <path value="$PROJECT_DIR$/app/vendor/symfony/web-link" />
       <path value="$PROJECT_DIR$/app/vendor/symfony/polyfill-php81" />
       <path value="$PROJECT_DIR$/app/vendor/symfony/monolog-bundle" />
-      <path value="$PROJECT_DIR$/app/vendor/symfony/validator" />
       <path value="$PROJECT_DIR$/app/vendor/symfony/polyfill-intl-grapheme" />
       <path value="$PROJECT_DIR$/app/vendor/symfony/messenger" />
       <path value="$PROJECT_DIR$/app/vendor/symfony/notifier" />
@@ -138,7 +137,7 @@
       <path value="$PROJECT_DIR$/app/vendor/symfony/asset" />
     </include_path>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="8.1">
+  <component name="PhpProjectSharedConfiguration" php_language_level="7.4">
     <option name="suggestChangeDefaultLanguageLevel" value="false" />
   </component>
   <component name="PhpUnit">
