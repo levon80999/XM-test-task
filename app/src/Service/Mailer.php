@@ -7,7 +7,6 @@ namespace App\Service;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\NamedAddress;
 
 class Mailer
 {
@@ -24,9 +23,9 @@ class Mailer
     public function sendReportMail(array $data)
     {
         $email = (new TemplatedEmail())
-            ->from(new NamedAddress('ourapp@ourapp.com', 'The Space Bar'))
-            ->to(new NamedAddress($data['email'], 'Dear client'))
-            ->subject("Company Symbol = {$data['companySymbol']} => Company’s Name = ${$data['companyName']}")
+            ->from('ourapp@ourapp.com')
+            ->to($data['email'])
+            ->subject("Company Symbol = {$data['companySymbol']} => Company’s Name = {$data['companyName']}")
             ->htmlTemplate('email/report.html.twig')
             ->context([
                 'startDate' => $data['startDate'],

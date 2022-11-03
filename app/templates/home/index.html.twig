@@ -35,6 +35,33 @@
             <input type="hidden" name="token" value="{{ csrf_token('delete-item') }}"/>
             <button class="btn btn-success" id="processButton">Process</button>
         </form>
+        <br><br>
+        {% if historicalData %}
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Open</th>
+                    <th>High</th>
+                    <th>Low</th>
+                    <th>Close</th>
+                    <th>Volume</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for item in historicalData %}
+                        <tr>
+                            <td>{{ item.date|e }}</td>
+                            <td>{{ item.open|e }}</td>
+                            <td>{{ item.high|e }}</td>
+                            <td>{{ item.low|e }}</td>
+                            <td>{{ item.close|e }}</td>
+                            <td>{{ item.volume|e }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
     </div>
 
 {% endblock %}
