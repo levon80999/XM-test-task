@@ -23,5 +23,10 @@ services:
     App\Command\SyncCompanySymbolsCommand:
         $companySymbolUrl: '%env(COMPANY_SYMBOL_URL)%'
 
+    App\Service\FetchHistoricalData:
+        $dataSourceUrl: '%env(DATA_SOURCE_URL)%'
+        $dataSourceApiKey: '%env(DATA_SOURCE_API_KEY)%'
+        $dataSourceApiHost: '%env(DATA_SOURCE_API_HOST)%'
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
