@@ -13,6 +13,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
 
 class HomeController extends AbstractController
 {
@@ -45,6 +48,9 @@ class HomeController extends AbstractController
      * @param HistoricalDataRequest $request
      * @return Response
      * @throws TransportExceptionInterface
+     * @throws ClientExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ServerExceptionInterface
      * @throws \Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
      */
     public function index(HistoricalDataRequest $request): Response
@@ -59,13 +65,20 @@ class HomeController extends AbstractController
                 $data = $request->getRequest()->request->all();
 
                 try {
-                    $historicalData = $this->historicalDataRepository->getDataBySymbol($data['companySymbol']);
+                    $historicalData = $this->historicalDataRepository->getDataBySymbol($data['companySymbol'], [
+                        'startDate' => strtotime($data['startDate']),
+                        'endDate' => strtotime($data['endDate']),
+                    ]);
 
                     if (empty($historicalData)) {
                         $this->fetchHistoricalData->getData($data['companySymbol']);
+
+                        $historicalData = $this->historicalDataRepository->getDataBySymbol($data['companySymbol'], [
+                            'startDate' => strtotime($data['startDate']),
+                            'endDate' => strtotime($data['endDate']),
+                        ]);
                     }
 
-                    $historicalData = $this->historicalDataRepository->getDataBySymbol($data['companySymbol']);
                     $this->fetchHistoricalData->getData($data['companySymbol']);
 
                     $result = $this->companySymbolsRepository->findBySymbol($data['companySymbol']);
@@ -76,10 +89,10 @@ class HomeController extends AbstractController
                 }
             }
         }
-
+        
         return $this->render('home/index.html.twig', [
             'errors' => $errors,
-            'historicalData' => $historicalData
+            'historicalData' => $historicalData,
         ]);
     }
 }

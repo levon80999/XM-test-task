@@ -41,12 +41,17 @@ class HistoricalDataRepository extends ServiceEntityRepository
         }
     }
 
-    public function getDataBySymbol(string $value)
+    public function getDataBySymbol(string $value, array $dates)
     {
          return $this->createQueryBuilder('h')
-            ->where('h.symbol = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getResult();
+             ->select(['h.date', 'h.open', 'h.high', 'h.low', 'h.close', 'h.volume'])
+             ->andWhere('h.symbol = :val')
+             ->andWhere('h.date >= :start')
+             ->andWhere('h.date <= :end')
+             ->setParameter('val', $value)
+             ->setParameter('start', $dates['startDate'])
+             ->setParameter('end', $dates['endDate'])
+             ->getQuery()
+             ->getResult();
     }
 }
