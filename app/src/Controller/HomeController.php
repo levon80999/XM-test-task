@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Repository\CompanySymbolsRepository;
+use App\Requests\HistoricalDataRequest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,13 +13,19 @@ class HomeController extends AbstractController
 {
     /**
      * @Route("/", name="app_home")
-     * @param CompanySymbolsRepository $companySymbolsRepository
+     * @param HistoricalDataRequest $request
      * @return Response
      */
-    public function index(CompanySymbolsRepository $companySymbolsRepository): Response
+    public function index(HistoricalDataRequest $request): Response
     {
-        return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
+        $errors = [];
+
+        if ($request->isMethod('POST')) {
+            $errors = $request->validate();
+
+            dd($errors);
+        }
+
+        return $this->render('home/index.html.twig', []);
     }
 }
