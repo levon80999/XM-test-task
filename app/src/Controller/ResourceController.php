@@ -17,6 +17,7 @@ class ResourceController extends AbstractController
      */
     public function index(Request $request, CompanySymbolsRepository $companySymbolsRepository): Response
     {
+        // this is another moment 
         $data = $companySymbolsRepository->findBySymbol($request->query->get('term'));
 
         return $this->json($data);
