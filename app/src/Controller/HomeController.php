@@ -24,6 +24,8 @@ class HomeController extends AbstractController
     private HistoricalDataRepository $historicalDataRepository;
     private CompanySymbolsRepository $companySymbolsRepository;
 
+
+
     /**
      * @param Mailer $mailer
      * @param FetchHistoricalData $fetchHistoricalData
@@ -64,6 +66,7 @@ class HomeController extends AbstractController
 
                 $data = $request->getRequest()->request->all();
 
+
                 try {
                     $historicalData = $this->historicalDataRepository->getDataBySymbol($data['companySymbol'], [
                         'startDate' => strtotime($data['startDate']),
@@ -85,11 +88,12 @@ class HomeController extends AbstractController
                     $data['companyName'] = $result[0]->getCompanyName();
                     $this->mailer->sendReportMail($data);
                 } catch (\Exception $exception) {
+                    // this is commit 
                     dd($exception);
                 }
             }
         }
-        
+
         return $this->render('home/index.html.twig', [
             'errors' => $errors,
             'historicalData' => $historicalData,
