@@ -88,7 +88,7 @@ class HomeController extends AbstractController
                     $data['companyName'] = $result[0]->getCompanyName();
                     $this->mailer->sendReportMail($data);
                 } catch (\Exception $exception) {
-                    // this is commit 
+                    // this is commit
                     dd($exception);
                 }
             }
