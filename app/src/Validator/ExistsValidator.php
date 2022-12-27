@@ -22,6 +22,7 @@ class ExistsValidator extends ConstraintValidator
      */
     public function __construct(ManagerRegistry $registry)
     {
+        // this is other
         $this->registry = $registry;
     }
 
